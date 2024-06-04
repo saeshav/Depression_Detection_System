@@ -14,3 +14,6 @@ Detect depression in users Twitter Post and display prediction.
 - mysqlclient
 - tensorflow==2.11.0
 - keras-preprocessing
+
+
+## Googles Word 2 Vec model used can be downloaded from this link - https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit
