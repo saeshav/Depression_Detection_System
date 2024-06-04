@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depression Detector</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            background: linear-gradient(to right, #00FFFF, #8A2BE2);
+            font-weight: bold;
+            font-size: 24px; /* Increased font size for body */
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Make the body height full viewport height */
+        }
+        .top-half {
+            flex: 1; /* Occupy half of the viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bottom-half {
+            flex: 1; /* Occupy half of the viewport height */
+            display: flex;
+            justify-content: center
+        }
+        .left-column {
+            flex: 1; /* Occupy half of the bottom-half */
+            margin-right: 20px;
+            font-size: 20px;
+            text-align: left;
+        }
+        .right-column {
+            flex: 1; /* Occupy half of the bottom-half */
+            font-size: 20px;
+            text-align: left;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 48px; /* Increased font size for h1 */
+        }
+        #output1 {
+            margin-top: 20px;
+            font-size: 20px; /* Increased font size for output1 */
+        }
+        #output2 {
+            margin-top: 10px;
+            font-size: 20px; /* Increased font size for output2 */
+        }
+
+        button[type="submit"] {
+            border-radius: 15px; /* Round the edges of the button */
+            font-size: 20px; /* Increased font size for button */
+            padding: 10px 20px; /* Increased padding for button */
+        }
+
+        /* Adjusted input size to accommodate new section */
+        #tweet {
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 24px; /* Increased font size for input */
+            height: 30px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="top-half">
+        <div class="center-column">
+            <!-- Home Button -->
+            <a href="/" class="btn-home"><i class="fa fa-home home-icon"></i></a>
+            <h1>Depression Detector</h1>
+            <form id="tweetForm" action="/detect" method="POST">
+                <label for="tweet">Enter your tweet:</label><br>
+                <input type="text" id="tweet" name="tweet" required><br><br>
+                <button type="submit">Submit</button>
+            </form>
+            <div id="output1">{{ output1 }}</div>
+            <div id="output2">{{ output2 }}</div>
+        </div>
+    </div>
+    <div class="bottom-half">
+        <div class="left-column">
+            <h2>Get Help Now !</h2>
+            <ul>
+                <li><a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwi9oqaM3OmFAxV0JoMDHfXzCXcYABABGgJzZg&ase=2&gclid=CjwKCAjwrcKxBhBMEiwAIVF8rEGGA2k91lxrGXWH5bNBOUZM3xln3V86w2OOWVBj15YyBHF8937QLxoC4e4QAvD_BwE&ohost=www.google.com&cid=CAESV-D2BVhR5pWfBdZgGAI0JrBo4HjtHKgvjDdBBQcG_I4OAdQxLPO3JrhxnAcKyy6zayjPrPa1pA80O10Zr2eJ_MBxSdRcdT_C-aLKVf45xNRB7Bhgy6QDbw&sig=AOD64_176WYmOPJio_yeVd4Dpf6Rmg0Jew&q&nis=4&adurl&ved=2ahUKEwjj2KCM3OmFAxU9oGMGHQSPAOkQ0Qx6BAgGEAE" target="_blank">Limitless SG</a></li>
+                <li><a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwi9oqaM3OmFAxV0JoMDHfXzCXcYABADGgJzZg&ase=2&gclid=CjwKCAjwrcKxBhBMEiwAIVF8rGAVL5SMjQO03cHm8dY9m_LS7gBa5cGdeW7Gd8n7auj5hjzGzc8V3BoCDK4QAvD_BwE&ohost=www.google.com&cid=CAESV-D2BVhR5pWfBdZgGAI0JrBo4HjtHKgvjDdBBQcG_I4OAdQxLPO3JrhxnAcKyy6zayjPrPa1pA80O10Zr2eJ_MBxSdRcdT_C-aLKVf45xNRB7Bhgy6QDbw&sig=AOD64_1KI-cl7X1_OwopcP5y657xrWxbSw&q&nis=4&adurl&ved=2ahUKEwjj2KCM3OmFAxU9oGMGHQSPAOkQ0Qx6BAgEEAE"target="_blank">People MY</a></li>
+                <li><a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwi9oqaM3OmFAxV0JoMDHfXzCXcYABAAGgJzZg&ase=2&gclid=CjwKCAjwrcKxBhBMEiwAIVF8rNCADhciYf70Kp_2iRVpIU4w1sAfxhSssOTRmk2XgpQR8_VSOTAPlBoChsQQAvD_BwE&ohost=www.google.com&cid=CAESV-D2BVhR5pWfBdZgGAI0JrBo4HjtHKgvjDdBBQcG_I4OAdQxLPO3JrhxnAcKyy6zayjPrPa1pA80O10Zr2eJ_MBxSdRcdT_C-aLKVf45xNRB7Bhgy6QDbw&sig=AOD64_2HhygACkp29phZ4eDwh0Y9YJ4GOw&q&nis=4&adurl&ved=2ahUKEwjj2KCM3OmFAxU9oGMGHQSPAOkQ0Qx6BAgFEAE"target="_blank">Our Better World</a></li>
+                <li><a href="https://www.webmd.com/depression/depression-resources"target="_blank">WebMD</a></li>
+                <button type="submit" onclick="window.location.href='/logout'" style="background:none; border:none; padding:0; font-size: inherit; color: blue; text-decoration: underline; cursor: pointer;">Log Out</button>
+            </ul>
+        </div>
+        <div class="right-column">
+            <h2>Depression Hotlines</h2>
+            <ul>
+                <li><strong>USA:</strong> National Suicide Prevention Lifeline - 1-800-273-TALK (1-800-273-8255)</li>
+                <li><strong>UK:</strong> Samaritans - 116 123</li>
+                <li><strong>Australia:</strong> Lifeline - 13 11 14</li>
+                <li><strong>Canada:</strong> Canada Suicide Prevention Service - 1-833-456-4566</li>
+                <li><strong>India:</strong>Vandrevala Foundation Helpline - 1860-2662-345, Snehi - 91-22-2778-3011/3074</li>
+                <li><strong>South Africa:</strong> Lifeline - 0861-322-322</li>
+                <li><strong>Malaysia:</strong> Befrienders Malaysia - 03-7627-2929</li>
+                <!-- Add more hotline contacts as needed -->
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
