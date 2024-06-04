@@ -16,4 +16,4 @@ Detect depression in users Twitter Post and display prediction.
 - keras-preprocessing
 
 
-## Googles Word 2 Vec model used can be downloaded from this link - https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit
+ Googles Word 2 Vec model used can be downloaded from this link - https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit
